@@ -1,2 +1,2 @@
-#NextJS task tracking project
+## NextJS task tracking project
 This will be big someday!
