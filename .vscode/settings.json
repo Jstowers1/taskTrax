@@ -1,3 +1,36 @@
 {
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "136.50.243.80",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "lunkServer",
+            "username": "JStowers",
+            "password": "7280",
+            "database": "STEM_APP_dev"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "192.168.86.27",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "lunkServer2",
+            "database": "taskTraxDev",
+            "username": "JStowers",
+            "password": "7280"
+        }
+    ],
+    "cSpell.words": [
+        "Trax"
+    ]
 }
