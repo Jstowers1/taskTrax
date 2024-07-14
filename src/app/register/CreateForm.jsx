@@ -10,6 +10,7 @@ export default function CreateForm(){
     const[isLoading, setLoading] = useState(false);
     const[error, setErrors] = useState([]);
     const[formValid, setFormValid] = useState(true);
+    const[dbErr, setDBErr] = useState(false);
 
     function errSearch(name){
         let found = false;
@@ -22,7 +23,6 @@ export default function CreateForm(){
     }
     
     const handleRegister = async(e) => {
-        console.log(formValid);
         let errors =[];
         setLoading(true);
 
@@ -47,10 +47,14 @@ export default function CreateForm(){
             body: e
         })
         
-
         if (res.status === 200){
+            setFormValid(true);
             router.push('/');
-        }else{
+        }else if(res.status === 500){
+            setFormValid(true);
+            setLoading(false);
+            setDBErr(true);
+        } else if(res.status === 400){
             setLoading(false);
             setFormValid(false);
         }
@@ -69,8 +73,8 @@ export default function CreateForm(){
                 <label htmlFor="password" className={errSearch("pwdErr")||!formValid ? "form-label is-invalid" : "form-label "}>Password</label>
                 <input type="password" className={errSearch("pwdErr")||!formValid ? "form-control is-invalid" : "form-control "} id="password" name="pwd" onChange={(e) => setPwd(e.target.value)} value={pwd}/>
             </div>
-            <h3 className="text-danger" style={{display: error.length!==0||!formValid ? "block" : "none"}}>{formValid && <span>All fields to register are required.</span>} {!formValid && <span>Username already in use.</span>}</h3>
-            <button type="submit" disabled={isLoading} className="btn btn-primary"> {isLoading && <span>Loading...</span>} {!isLoading && <span>register</span>}</button>
+            <h3 className="text-danger" style={{display: error.length!==0||!formValid||dbErr ? "block" : "none"}}>{error.length!==0 && <span>All fields to register are required.</span>} {!formValid && <span>Username already in use.</span>}{dbErr && <span>Server currently down, our apologies!</span>}</h3>
+            <button type="submit" disabled={isLoading} className="btn btn-primary"> {isLoading && <span>Loading...</span>} {!isLoading && <span>Register</span>}</button>
 
 
             </form>

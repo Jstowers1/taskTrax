@@ -1,6 +1,8 @@
+"use server"
 import pool from "../../libs/mysql";
-import { login } from "../../libs/lib";
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { encrypt } from "../../libs/lib";
 
 
 export async function POST(req){
@@ -16,10 +18,19 @@ export async function POST(req){
         if(data.length === 1){
             const result = await db.execute('SELECT user_id FROM users WHERE username = ?', [username]);
             const userID = <any>result[0][0];
-            login(username, userID);
+            const user = {username: username, userID: userID.user_id};
+            // Create the session
+            const expires = new Date(Date.now() + 10 * 10000);
+            const session = await encrypt({ user, expires });
+
+            // Save the session in a cookie console.log('cookies?!');
+            cookies().set("session", session, { maxAge: 20});
+
+
+
             return NextResponse.json({ status: 200 })
         } else {
-            return NextResponse.json({ status: 400 });
+            return NextResponse.json({error: "Invalid username or password!"},{ status: 400 });
         }
     }catch (error){
         console.log(error);

@@ -7,10 +7,20 @@ export default async function Home() {
 
   return (
     <>
-    <div className="d-flex justify-content-end">
-      <Link href="/login">
-        <button type="button" className="btn btn-primary">Login</button>
-      </Link>
+    <div className="navbar pt-0">
+      <h2>TaskTrax</h2>
+      <div className="d-flex justify-content-end">
+        <div className="pe-4">
+          <Link href="/login">
+            <button type="button" className="btn btn-primary">Login</button>
+          </Link>
+        </div>
+        <div>
+          <Link href="/register">
+            <button type="button" className="btn btn-primary">Register</button>
+          </Link>
+        </div>
+      </div>
     </div>
 
     <div className="container text-center">

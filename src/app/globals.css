@@ -1,9 +1,9 @@
 body{
-    background-color: lightgray;
+    background-color: #999999;
 }
 
 .loginBG{
-    background-color:darkgray;
+    background-color:#cccccc;
     padding: 20px;
     border-radius: 25px;
 }

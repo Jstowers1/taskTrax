@@ -11,6 +11,7 @@ export default function CreateForm(){
     const[isLoading, setLoading] = useState(false);
     const[error, setErrors] = useState([]);
     const[formValid, setFormValid] = useState(true);
+    const[dbErr, setDBErr] = useState(false);
 
     function errSearch(name){
         let found = false;
@@ -35,7 +36,7 @@ export default function CreateForm(){
             errors.push("pwdErr");
             setLoading(false);
         }
-
+        console.log(errors.length);
         setErrors(errors);
         if(errors.length !== 0){
             setFormValid(true);
@@ -48,12 +49,16 @@ export default function CreateForm(){
         })
         
         if (res.status === 200){
+            setFormValid(true);
             router.push('/');
-        }else{
+        }else if(res.status === 500){
+            setFormValid(true);
+            setLoading(false);
+            setDBErr(true);
+        } else if(res.status === 400){
             setLoading(false);
             setFormValid(false);
         }
-        
 
     }
 
@@ -69,7 +74,7 @@ export default function CreateForm(){
                 <label htmlFor="password" className={errSearch("pwdErr")||!formValid ? "form-label is-invalid" : "form-label "}>Password</label>
                 <input type="password" className={errSearch("pwdErr")||!formValid ? "form-control is-invalid" : "form-control "} id="password" name="pwd" onChange={(e) => setPwd(e.target.value)} value={pwd}/>
             </div>
-            <h3 className="text-danger" style={{display: error.length!==0||!formValid ? "block" : "none"}}>{formValid && <span>All fields to log in are required.</span>} {!formValid && <span>Invalid username or password.</span>}</h3>
+            <h3 className="text-danger" style={{display: error.length!==0||!formValid||dbErr ? "block" : "none"}}>{error.length!==0 && <span>All fields to log in are required.</span>} {!formValid && <span>Invalid username or password.</span>} {dbErr && <span>Server currently down, our apologies!</span>}</h3>
             <button type="submit" disabled={isLoading} className="btn btn-primary"> {isLoading && <span>Loading...</span>} {!isLoading && <span>Log In</span>}</button>
 
 
