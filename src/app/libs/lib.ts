@@ -9,7 +9,7 @@ export async function encrypt(payload: any) {
     return await new SignJWT(payload)
       .setProtectedHeader({ alg: "HS256" })
       .setIssuedAt()
-      .setExpirationTime("100 sec from now")
+      .setExpirationTime("2h")
       .sign(key);
 }
 
@@ -31,7 +31,6 @@ export async function updateSession(request: NextRequest) {
         name:"session",
         value: await encrypt(parsed),
         httpOnly: true,
-        expires: parsed.expires,
     });
     return res;
 }

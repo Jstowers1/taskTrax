@@ -36,7 +36,6 @@ export default function CreateForm(){
             errors.push("pwdErr");
             setLoading(false);
         }
-        console.log(errors.length);
         setErrors(errors);
         if(errors.length !== 0){
             setFormValid(true);
@@ -50,7 +49,7 @@ export default function CreateForm(){
         
         if (res.status === 200){
             setFormValid(true);
-            router.push('/');
+            router.push('/dashboard');
         }else if(res.status === 500){
             setFormValid(true);
             setLoading(false);

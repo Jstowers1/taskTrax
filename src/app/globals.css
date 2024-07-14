@@ -7,3 +7,23 @@ body{
     padding: 20px;
     border-radius: 25px;
 }
+
+.subjectBG{
+    background-color: #bfc3c9;
+    border-radius: 10px;
+    height: 90vh;
+    min-width: 1vw;
+}
+
+.dashContent{
+    background-color: #bfc3c9;
+    height: 90vh;
+    border-radius: 10px;
+    min-width: 1vw;
+    font-size: 1vw;
+}
+
+.customOffCanvas{
+    background: #999999;
+}
+

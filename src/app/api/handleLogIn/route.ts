@@ -24,10 +24,7 @@ export async function POST(req){
             const session = await encrypt({ user, expires });
 
             // Save the session in a cookie console.log('cookies?!');
-            cookies().set("session", session, { maxAge: 20});
-
-
-
+            cookies().set("session", session);
             return NextResponse.json({ status: 200 })
         } else {
             return NextResponse.json({error: "Invalid username or password!"},{ status: 400 });

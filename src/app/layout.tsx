@@ -1,6 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import '@mantine/dates/styles.css';
+import '@mantine/core/styles.css';
 import './globals.css';
 import { Roboto_Mono } from 'next/font/google';
+
+import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 
 const robotoMono = Roboto_Mono({ subsets: ['latin' ]});
 
@@ -16,9 +20,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body className={robotoMono.className}>
-        <div className="p-4">
-          {children}
+        <div className="p-4" style={{minWidth: "0.2vw"}}>
+          <MantineProvider>{children}</MantineProvider>
         </div>
       </body>
     </html>
