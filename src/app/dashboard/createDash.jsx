@@ -1,5 +1,5 @@
 "use client"
-import { useMantineTheme } from '@mantine/core';
+
 import { useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
@@ -8,10 +8,11 @@ import Tab from 'react-bootstrap/Tab';
 import OffCanvas from 'react-bootstrap/Offcanvas'
 import Navbar from 'react-bootstrap/Navbar';
 import HomeCalendar from './calendar'
+import { DisplayTasks, SoonTasks} from './tasks'
+import DisplaySchedule from './schedule'
 
 
 export default function userDash({ userInfo }){
-    const theme = useMantineTheme();
     const username = userInfo[0];
     const userID = userInfo[1];
 
@@ -27,7 +28,10 @@ export default function userDash({ userInfo }){
             <Col sm={1}>
                     {/*Desktop Nav */}
                     <Nav variant="pills" className="flex-column subjectBG p-2 d-none d-xl-flex">
-                    <div>
+                    <div className="text-end">
+                        <Nav.Item>
+                            <button type="button" className="btn" onClick={() => alert("clicked!")}>New Event</button>
+                        </Nav.Item>
                         <Nav.Item>
                             <Nav.Link eventKey="Home">Home</Nav.Link>
                         </Nav.Item>
@@ -51,8 +55,11 @@ export default function userDash({ userInfo }){
                         </OffCanvas.Header>
 
                         <OffCanvas.Body>
-                            <Nav variant="pills" className="flex-column subjectBG p-2 ">
+                            <Nav variant="pills" className="flex-column subjectBGMobile p-2 ">
                             <div>
+                                <Nav.Item>
+                                    <button type="button" className="btn" >New Event</button>
+                                </Nav.Item>
                                 <Nav.Item>
                                     <Nav.Link eventKey="Home">Home</Nav.Link>
                                 </Nav.Item>
@@ -71,31 +78,120 @@ export default function userDash({ userInfo }){
                 <Col sm={11}>
                     <Tab.Content>
                         <Tab.Pane eventKey="Home">
-                            <div className="dashContent">
+                            <div>
+                                <div className="row">
+                                    {/*First Row*/}
+                                    <div className="col-3 d-none d-sm-none d-md-none d-lg-none d-xl-flex pt-4 justify-content-center dashContent ms-5 me-5"> {/*Desktop*/}
+                                        <div>
+                                            <div className="row text-center"><h2>Calendar</h2></div>
+                                            <div className="row">
+                                                <HomeCalendar calSize={"xl"} /> 
+                                            </div>
+                                            <div className="row"> 
+                                                <SoonTasks />
+                                            </div>   
+                                        </div>   
+                                    </div>
+                                    <div className="col-5 d-none d-sm-none d-md-none d-lg-flex d-xl-none pt-4 justify-content-center dashContentMobile"> {/*Tablet Sideways*/}
+                                        <div>
+                                            <div className="row text-center"><h2>Calendar</h2></div>
+                                            <div className="row">
+                                                <HomeCalendar calSize={"lg"} /> 
+                                            </div>
+                                            <div className="row"> 
+                                                <SoonTasks />
+                                            </div>   
+                                        </div>
+                                        
+                                    </div>
+                                    <div className="col-6 d-none d-sm-none d-md-flex d-lg-none d-xl-none pt-4 justify-content-center dashContentMobile"> {/*Tablet Portrait*/}
+                                        <div>
+                                            <div className="row text-center"><h2>Calendar</h2></div>
+                                            <div className="row">
+                                                <HomeCalendar calSize={"md"} /> 
+                                            </div>
+                                            <div className="row"> 
+                                                <SoonTasks />
+                                            </div>   
+                                        </div>
+                                    </div>
+                                    <div className="col-6 d-none d-sm-flex d-md-none d-lg-none d-xl-none pt-4 justify-content-center dashContentMobile"> {/*IphoneSE2 Portrait*/}
+                                        <div>
+                                            <div className="row text-center"><h2>Calendar</h2></div>
+                                            <div className="row">
+                                                <HomeCalendar calSize={"sm"} /> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-12 d-flex d-sm-none d-md-none d-lg-none d-xl-none pt-4 ps-2 justify-content-center dashContentMobile"> {/*Iphone*/}
+                                        <div>
+                                            <div className="row text-center"><h2>Calendar</h2></div>
+                                            <div className="row">
+                                                <HomeCalendar calSize={"sm"} /> 
+                                            </div>
+                                            <div className="row"> 
+                                                <SoonTasks />
+                                            </div>   
+                                        </div>
+                                    </div>
+                                    
+                                    {/*Spacer*/}
+                                    <div className="col-1 d-sm-none d-md-flex d-xl-none"></div>
 
-                                {/*Desktop Environment*/}
-                                <div className="row p-4 d-none d-sm-flex">
-                                    <div className="col-3">
-                                        <HomeCalendar />
+                                    {/*Second Row*/}
+                                    <div className="col-4 pt-4 d-none d-xl-flex dashContent ms-5 me-5">    {/*Desktop*/}
+                                        <div style={{width:"100%"}}>
+                                            <div className="row text-center"><h2>Reminders</h2></div>
+                                            <div className="row"><h2><DisplayTasks /></h2> </div>
+                                        </div>
+                                    </div>                                    
+                                    <div className="col-5 pt-4 d-none d-md-none d-lg-flex d-xl-none dashContentMobile"> {/*Tablet*/}
+                                        <div style={{width:"100%"}}>
+                                            <div className="row text-center"><h2>Reminders</h2></div>
+                                            <div className="row"><h2><DisplayTasks /></h2> </div>
+                                        </div>
+                                    </div>                                    
+                                    <div className="col-4 pt-4 d-none d-md-flex d-lg-none d-xl-none dashContentMobile"> {/*Phone landscape*/}
+                                        <div style={{width:"100%"}}>
+                                            <div className="row text-center"><h2>Reminders</h2></div>
+                                            <div className="row"><h2><DisplayTasks /></h2> </div>
+                                        </div>
+                                    </div>                                    
+                                    <div className="col-12 pt-4 d-flex d-sm-none d-lg-none d-xl-none dashContentMobile"> {/*Phone Portrait*/}
+                                        <div style={{width:"100%"}}>
+                                            <div className="row text-center"><h2>Reminders</h2></div>
+                                            <div className="row"><h2><DisplayTasks /></h2> </div>
+                                        </div>
                                     </div>
-                                    <div className="col-1 d-none d-xl-flex"></div>
-                                    <div className="col-4 d-none d-xl-flex">
-                                        <h2>Hello, {userID}</h2>
-                                    </div>
-                                    <div className="col-5 d-sm-flex d-xl-none">
-                                        <h2>Hello user!</h2>
-                                    </div>
-                                </div>
+                                    
+                                    {/*Spacer*/}
+                                    <div className="col-1 d-sm-none d-md-flex d-xl-none"></div>
 
-                                {/*Mobile Environment*/}
-                                <div className="row p-4 d-flex d-sm-none">
-                                    <div className="col-12">
-                                        <h2>Hello user!</h2>
+                                    {/*Third Row*/}
+                                    <div className="col-3 pt-4 d-none d-xl-flex dashContent ms-5"> {/*Desktop*/}
+                                        <div style={{width:"100%"}}>
+                                            <div className="row text-center"><h2>Schedule</h2></div>
+                                            <div className="row"><h2><DisplaySchedule /></h2> </div>
+                                        </div>
+                                    </div>                                    
+                                    <div className="col-11 pt-4 d-none d-md-flex d-xl-none dashContentMobile"> {/*Phone landscape/Tablet*/}
+                                        <div style={{width:"100%"}}>
+                                            <div className="row text-center"><h2>Schedule</h2></div>
+                                            <div className="row"><h2><DisplaySchedule /></h2> </div>
+                                        </div>
+                                    </div>                                    
+                                    <div className="col-12 pt-4 d-flex d-sm-none d-xl-none dashContentMobile"> {/*Phone Portrait*/}
+                                        <div style={{width:"100%"}}>
+                                            <div className="row text-center"><h2>Schedule</h2></div>
+                                            <div className="row"><h2><DisplaySchedule /></h2></div>
+                                        </div>
                                     </div>
-                                    <div className="col-12">
-                                        <h2>Hello user!</h2>
-                                    </div>
+
+
                                 </div>
+                                
+
+                                
                             </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="Calculus">Calculus</Tab.Pane>

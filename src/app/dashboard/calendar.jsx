@@ -1,9 +1,9 @@
 "use client"
 import { DatePicker } from '@mantine/dates';
 import React, { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
-export default function homeCalendar(){
+export default function homeCalendar( {calSize}){
     const [selectedDate, setSelectedDate] = useState(null);
     const [showModal, setShowModal] = useState(false);
   
@@ -11,24 +11,27 @@ export default function homeCalendar(){
         console.log(date);
         setSelectedDate(date);
         setShowModal(true);
-        let selectedDay = "";
-        selectedDay += date.toString();
-        console.log(selectedDay);
     };
   
     const handleClose = () => setShowModal(false);
 
     return(
+        <>
         <div>
             <DatePicker 
                 styles={{
-                    calendarHeader:{backgroundColor:"red", borderRadius:"10px"},
-                    weekday:{backgroundColor:"red", borderTopLeftRadius:"10px", borderTopRightRadius:"10px"},
-                    monthThead:{backgroundColor:"red", borderRadius:"10px", borderBottomRightRadius:"10px"},
+                    calendarHeader:{backgroundColor:"#999999", borderRadius:"10px"},
+                    weekday:{color:"black"},
+                    month:{backgroundColor:"#999999", borderRadius:"10px"},
+                    monthsList:{backgroundColor:"#999999", borderRadius:"10px"},
                 }}
+                classNames={{ 
+                    weekday: "text-center"
+                }}
+                
                 onChange={handleDateChange}
                 maxLevel="year"
-                size="xl"
+                size= {calSize}
             />
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -45,5 +48,6 @@ export default function homeCalendar(){
             </Modal.Body>
       </Modal>
         </div>
+    </>
     )
 }
