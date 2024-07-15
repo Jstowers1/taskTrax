@@ -49,7 +49,7 @@ export default function CreateForm(){
         
         if (res.status === 200){
             setFormValid(true);
-            router.push('/');
+            router.push('/login');
         }else if(res.status === 500){
             setFormValid(true);
             setLoading(false);
