@@ -1,6 +1,6 @@
 "use client"
 
-export default function displaySchedule(){
+export default function DisplaySchedule(){
 
     return(
         <>

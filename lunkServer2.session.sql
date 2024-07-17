@@ -41,3 +41,17 @@ CREATE TABLE taskConnector (
     FOREIGN KEY (subjectID) REFERENCES subject(subjectID),
     FOREIGN KEY (taskID) REFERENCES task(taskID)
 );
+
+
+--@block
+CREATE TABLE subjectConnector (
+    subjectConnID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    userID BIGINT,
+    subjectID BIGINT,
+    FOREIGN KEY (userID) REFERENCES users(userID),
+    FOREIGN KEY (subjectID) REFERENCES subject(subjectID)
+)
+
+--@block
+DELETE FROM subject WHERE subjectID=1;
+ALTER TABLE subject AUTO_INCREMENT=1;

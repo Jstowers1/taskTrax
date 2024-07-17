@@ -3,7 +3,7 @@ body{
 }
 
 .loginBG{
-    background-color:#cccccc;
+    background-color:#bfc3c9;
     padding: 20px;
     border-radius: 25px;
 }
@@ -11,8 +11,10 @@ body{
 .subjectBG{
     background-color: #bfc3c9;
     border-radius: 10px;
-    height: 90vh;
+    max-height: 90vh;
+    min-height: 90vh;
     min-width: 1vw;
+    overflow: auto;
 }
 
 .subjectBGMobile{
@@ -62,3 +64,12 @@ body{
     background: #999999;
 }
 
+.mantine-ColorInput-dropdown {
+    z-index: 1200 !important;
+    background-color: #bfc3c9;
+}
+
+.mantine-DatePickerInput-monthsList {
+    z-index: 1200 !important;
+    background-color: #bfc3c9;
+}

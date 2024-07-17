@@ -3,7 +3,7 @@ import { DatePicker } from '@mantine/dates';
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 
-export default function homeCalendar( {calSize}){
+export default function HomeCalendar( {calSize}){
     const [selectedDate, setSelectedDate] = useState(null);
     const [showModal, setShowModal] = useState(false);
   

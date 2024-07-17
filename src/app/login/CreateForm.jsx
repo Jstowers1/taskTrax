@@ -54,9 +54,6 @@ export default function CreateForm(){
             setFormValid(true);
             setLoading(false);
             setDBErr(true);
-        } else if(res.status === 400){
-            setLoading(false);
-            setFormValid(false);
         }
 
     }
